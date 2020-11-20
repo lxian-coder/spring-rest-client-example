@@ -30,14 +30,20 @@ public class ApiServiceImplTest {
 
     @Test
     public void testGetCustomer() throws Exception {
-        Customer pet = apiService.getCustomerById("2");
+        Customer pet = apiService.getCustomerById("363");
 
-        //assertEquals(4,pets.size());
+        assertEquals("John",pet.getFirstname());
     }
 
     @Test
     public void testGetListCustomers() throws Exception {
         ListCustomers listCustomers = apiService.getListCustomers();
         assertEquals(10, listCustomers.getCustomers().size());
+    }
+
+    @Test
+    public void testGetMeta() throws Exception{
+        ListCustomers listCustomers = apiService.getListCustomers();
+        assertEquals(43,listCustomers.getMeta().getCount().intValue());
     }
 }

@@ -2,6 +2,7 @@ package guru.springwork.springrestclientexamples.services;
 
 import guru.springwork.api.domin.Customer;
 import guru.springwork.api.domin.ListCustomers;
+import reactor.core.publisher.Mono;
 
 
 /**
@@ -10,5 +11,7 @@ import guru.springwork.api.domin.ListCustomers;
 public interface ApiService {
     Customer getCustomerById(String  s);
     ListCustomers getListCustomers();
+
+    Mono<Customer> getCustomerReactive (String s);
 
 }

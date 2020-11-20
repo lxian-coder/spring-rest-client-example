@@ -15,4 +15,10 @@ public class RestTemplateConfig {
 
         return builder.build();
     }
+    @Bean
+    public RestTemplateBuilder restTemplateBuilder(){
+        // need to provide a rest template builder because @RestTemplateAutoConfiguration
+        // does not work with webflux
+        return new RestTemplateBuilder();
+    }
 }
