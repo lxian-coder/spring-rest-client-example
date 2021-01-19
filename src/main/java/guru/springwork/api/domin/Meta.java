@@ -1,12 +1,11 @@
 
-package  guru.springwork.api.domin;
+package guru.springwork.api.domin;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Meta implements Serializable
-{
+public class Meta implements Serializable {
 
     private Integer count;
     private Integer limit;

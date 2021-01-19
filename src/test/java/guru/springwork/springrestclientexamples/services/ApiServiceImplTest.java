@@ -32,7 +32,7 @@ public class ApiServiceImplTest {
     public void testGetCustomer() throws Exception {
         Customer pet = apiService.getCustomerById("363");
 
-        assertEquals("John",pet.getFirstname());
+        assertEquals("John", pet.getFirstname());
     }
 
     @Test
@@ -42,8 +42,8 @@ public class ApiServiceImplTest {
     }
 
     @Test
-    public void testGetMeta() throws Exception{
+    public void testGetMeta() throws Exception {
         ListCustomers listCustomers = apiService.getListCustomers();
-        assertEquals(43,listCustomers.getMeta().getCount().intValue());
+        assertEquals(43, listCustomers.getMeta().getCount().intValue());
     }
 }

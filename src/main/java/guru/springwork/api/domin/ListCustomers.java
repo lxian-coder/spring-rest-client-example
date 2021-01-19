@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListCustomers implements Serializable
-{
+public class ListCustomers implements Serializable {
 
     private Meta meta;
     private List<Customer> customers = null;

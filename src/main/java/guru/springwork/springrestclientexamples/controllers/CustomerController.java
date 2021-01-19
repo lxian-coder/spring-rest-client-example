@@ -21,33 +21,32 @@ public class CustomerController {
 
     private ApiService apiService;
 
-    public CustomerController(ApiService apiService){
+    public CustomerController(ApiService apiService) {
         this.apiService = apiService;
     }
 
-    @GetMapping({"","/","/index"})
-    public String index(Model model){
-        model.addAttribute("pparam",new Param());
+    @GetMapping({"", "/", "/index"})
+    public String index(Model model) {
+        model.addAttribute("pparam", new Param());
         return "index";
     }
 
     @PostMapping("/customersId/")
-    public String formPost(@ModelAttribute Param param, Model model){
-        log.error("I am in @PostMapping 34:"+ param.getId());
+    public String formPost(@ModelAttribute Param param, Model model) {
+        log.error("I am in @PostMapping 34:" + param.getId());
 
-      //  model.addAttribute("customers", apiService.getCustomerById(param.getId()));
-        model.addAttribute("customers",apiService.getCustomerReactive(param.getId()));
+        //  model.addAttribute("customers", apiService.getCustomerById(param.getId()));
+        model.addAttribute("customers", apiService.getCustomerReactive(param.getId()));
         return "customers";
     }
 
     @GetMapping("/allCustomers")
-    public String allCustomers(Model model){
-        model.addAttribute("customers",apiService.getListCustomers().getCustomers());
+    public String allCustomers(Model model) {
+        model.addAttribute("customers", apiService.getListCustomers().getCustomers());
 
 
         return "customers";
     }
-
 
 
 }

@@ -5,8 +5,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Customer implements Serializable
-{
+public class Customer implements Serializable {
 
     private String firstname;
     private String lastname;

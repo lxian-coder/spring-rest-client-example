@@ -22,7 +22,7 @@ public class RestTemplateExamples {
     public static final String API_ROOT = "https://api.predic8.de:443/shop";
 
     @Test
-    public void getCategories() throws Exception{
+    public void getCategories() throws Exception {
         String apiUrl = API_ROOT + "/categories/";
 
         RestTemplate restTemplate = new RestTemplate();
@@ -32,36 +32,39 @@ public class RestTemplateExamples {
         System.out.println("Response");
         System.out.println(jsonNode.toString());
     }
-   @Test
-    public void getCustomers() throws Exception{
+
+    @Test
+    public void getCustomers() throws Exception {
         String apiUrl = API_ROOT + "/customers/";
 
         RestTemplate restTemplate = new RestTemplate();
 
         JsonNode jsonNode = restTemplate.getForObject(apiUrl, JsonNode.class);
 
-       System.out.println("Response");
-       System.out.println(jsonNode.toString());
-   }
-   //POST
-  @Test
-    public void createCustomer() throws Exception{
+        System.out.println("Response");
+        System.out.println(jsonNode.toString());
+    }
+
+    //POST
+    @Test
+    public void createCustomer() throws Exception {
         String apiUrl = API_ROOT + "/customers/";
 
         RestTemplate restTemplate = new RestTemplate();
 
         //Java object ot parse to JSON
-      Map<String,Object> postMap = new HashMap<>();
-      postMap.put("firstname","Joe");
-      postMap.put("lastname","Buck");
+        Map<String, Object> postMap = new HashMap<>();
+        postMap.put("firstname", "Joe");
+        postMap.put("lastname", "Buck");
 
-      JsonNode jsonNode = restTemplate.postForObject(apiUrl,postMap,JsonNode.class);
+        JsonNode jsonNode = restTemplate.postForObject(apiUrl, postMap, JsonNode.class);
 
-      System.out.println("Response");
-      System.out.println(jsonNode.toString());
+        System.out.println("Response");
+        System.out.println(jsonNode.toString());
     }
+
     @Test
-    public void updateCustomer() throws Exception{
+    public void updateCustomer() throws Exception {
 
         // 1 建立一个新的customer， 建立之后POST给网站，然后网站会自动给它一个ID
         // create customer ot update
@@ -70,11 +73,11 @@ public class RestTemplateExamples {
         RestTemplate restTemplate = new RestTemplate();
 
         // Java object ot parse to JSON
-        Map<String,Object> postMap = new HashMap<>();
+        Map<String, Object> postMap = new HashMap<>();
         postMap.put("firstname", "Micheal");
-        postMap.put("lastname","Weston");
+        postMap.put("lastname", "Weston");
 
-        JsonNode jsonNode = restTemplate.postForObject(apiUrl,postMap,JsonNode.class);
+        JsonNode jsonNode = restTemplate.postForObject(apiUrl, postMap, JsonNode.class);
 
         System.out.println("Response");
         System.out.println(jsonNode.toString());
@@ -92,23 +95,24 @@ public class RestTemplateExamples {
         //  把ID 放到map里面，Put到网站上
         restTemplate.put(apiUrl + id, postMap);
 
-        JsonNode updatedNode = restTemplate.getForObject(apiUrl+id, JsonNode.class);
+        JsonNode updatedNode = restTemplate.getForObject(apiUrl + id, JsonNode.class);
         System.out.println(updatedNode.toString());
     }
+
     @Test(expected = ResourceAccessException.class) // 为了支持PATCH 增加了httpclient pom 和这个
-    public void updateCustomerUsingPatchSunHttp() throws Exception{
+    public void updateCustomerUsingPatchSunHttp() throws Exception {
 
         //create customer to update
         String apiUrl = API_ROOT + "/customers/";
 
         RestTemplate restTemplate = new RestTemplate();
 
-       // Java object to parse to JSON
-       Map<String,Object> postMap = new HashMap<>();
-       postMap.put("firstname", "Sam");
-       postMap.put("lastname", "Axe");
+        // Java object to parse to JSON
+        Map<String, Object> postMap = new HashMap<>();
+        postMap.put("firstname", "Sam");
+        postMap.put("lastname", "Axe");
 
-       JsonNode jsonNode = restTemplate.postForObject(apiUrl, postMap, JsonNode.class);
+        JsonNode jsonNode = restTemplate.postForObject(apiUrl, postMap, JsonNode.class);
         System.out.println("Response");
         System.out.println(jsonNode.toString());
 
@@ -118,21 +122,21 @@ public class RestTemplateExamples {
 
         System.out.println("Create customer id:" + id);
 
-        postMap.put("firstname","Sam 2");
-        postMap.put("lastname","Axe 2");
+        postMap.put("firstname", "Sam 2");
+        postMap.put("lastname", "Axe 2");
 
     }
 
     @Test
-    public void updateCustomerUsingPATCH() throws Exception{
-       // create customer to update
+    public void updateCustomerUsingPATCH() throws Exception {
+        // create customer to update
         String apiUrl = API_ROOT + "/customers/";
-       // Use Apache Http client factory
+        // Use Apache Http client factory
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         RestTemplate restTemplate = new RestTemplate(requestFactory);
 
         // Java object to parse to JSON
-        Map<String,Object> postMap = new HashMap<>();
+        Map<String, Object> postMap = new HashMap<>();
         postMap.put("firstname", "Sam");
         postMap.put("lastname", "Axe");
 
@@ -147,29 +151,29 @@ public class RestTemplateExamples {
 
         System.out.println("Create customer id:" + id);
 
-        postMap.put("firstname","Sam 2");
-        postMap.put("lastname","Axe 2");
+        postMap.put("firstname", "Sam 2");
+        postMap.put("lastname", "Axe 2");
 
         // example of setting headers
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<Map<String,Object>> entity = new HttpEntity<>(postMap,headers);
-        JsonNode updatedNode = restTemplate.patchForObject(apiUrl+id,entity,JsonNode.class);
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(postMap, headers);
+        JsonNode updatedNode = restTemplate.patchForObject(apiUrl + id, entity, JsonNode.class);
 
         System.out.println(updatedNode.toString());
     }
 
     @Test(expected = HttpClientErrorException.class)
-    public void deleteCustomer() throws Exception{
+    public void deleteCustomer() throws Exception {
         // create customer to update
         String apiUrl = API_ROOT + "/customers/";
 
         RestTemplate restTemplate = new RestTemplate();
 
         // Java object to parse to JSON
-        Map<String,Object> postMap = new HashMap<>();
+        Map<String, Object> postMap = new HashMap<>();
         postMap.put("firstname", "Sam");
         postMap.put("lastname", "Axe");
 
@@ -185,16 +189,12 @@ public class RestTemplateExamples {
         System.out.println("Create customer id:" + id);
 
 
-        restTemplate.delete(apiUrl+id);// expects 200 status
+        restTemplate.delete(apiUrl + id);// expects 200 status
         System.out.println("Customer deleted");
 
         // should go boom on 404
-        restTemplate.getForObject(apiUrl+id, JsonNode.class);
+        restTemplate.getForObject(apiUrl + id, JsonNode.class);
     }
-
-
-
-
 
 
 }

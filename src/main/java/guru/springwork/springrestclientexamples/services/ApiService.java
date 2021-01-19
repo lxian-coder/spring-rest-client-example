@@ -9,9 +9,10 @@ import reactor.core.publisher.Mono;
  * Darcy Xian  18/11/20  10:18 pm      spring-rest-client-examples
  */
 public interface ApiService {
-    Customer getCustomerById(String  s);
+    Customer getCustomerById(String s);
+
     ListCustomers getListCustomers();
 
-    Mono<Customer> getCustomerReactive (String s);
+    Mono<Customer> getCustomerReactive(String s);
 
 }

@@ -13,20 +13,19 @@ import reactor.core.publisher.Mono;
  * Darcy Xian  18/11/20  10:24 pm      spring-rest-client-examples
  */
 @Service
-public class ApiServiceImpl implements ApiService{
+public class ApiServiceImpl implements ApiService {
 
     private RestTemplate restTemplate;
     private final String api_url;
 
 
-    public ApiServiceImpl(RestTemplate restTemplate, @Value("${api.url}") String api_url)
-    {
+    public ApiServiceImpl(RestTemplate restTemplate, @Value("${api.url}") String api_url) {
         this.restTemplate = restTemplate;
         this.api_url = api_url;
     }
 
     @Override
-    public Customer getCustomerById (String s) {
+    public Customer getCustomerById(String s) {
 
         Customer customer = restTemplate.getForObject("https://api.predic8.de:443/shop/customers/" + s, Customer.class);
         return customer;
@@ -35,7 +34,7 @@ public class ApiServiceImpl implements ApiService{
     @Override
     public ListCustomers getListCustomers() {
 
-        ListCustomers listCustomers = restTemplate.getForObject("https://api.predic8.de:443/shop/customers/",ListCustomers.class);
+        ListCustomers listCustomers = restTemplate.getForObject("https://api.predic8.de:443/shop/customers/", ListCustomers.class);
         return listCustomers;
     }
 
@@ -44,7 +43,7 @@ public class ApiServiceImpl implements ApiService{
 
         return WebClient.create(api_url)
                 .get()
-                .uri("/"+ss)
+                .uri("/" + ss)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .flatMap(result -> result.bodyToMono(Customer.class));
